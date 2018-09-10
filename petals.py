@@ -1311,7 +1311,10 @@ def plot_gap_log(res_file="petal_res.txt", G=1, plot_an=True, lbl=None,
         #Correct for time-space asymmetry s.t. renormalised theory is LI.
         #Also from Shigemitsu & Kogut.
         if eta_corr:
-            y_weak /= sp.sqrt(1 + 1. / x_app / sp.pi)
+            # Comparing with the paper, this original line
+            # y_weak /= sp.sqrt(1 + 1. / x_app / sp.pi)
+            # had a sign error!
+            y_weak /= sp.sqrt(1 - 1. / x_app / sp.pi)
         plt.plot(xfac * x_app, yfac * y_weak, 'g-', label='WC')
         
     ress, Ls = filt_res(ress, G=G, **kwargs)
